@@ -23,14 +23,14 @@ module TransmissionRSS
       seen_file = options[:seen_file]
 
       # Prepare Array of feeds URLs.
-      @feeds = feeds.map { |config| TransmissionRSS::Feed.new(config) }
+      @feeds = feeds.map { |config| TransmissionRSS::Feed.new(config, options[:default_download_path]) }
 
       # Nothing seen, yet.
       @seen = SeenFile.new(seen_file)
 
       # Initialize log instance.
       @log = Log.instance
-
+      
       # Log number of +@seen+ URIs.
       @log.debug(@seen.size.to_s + ' uris from seenfile')
     end
